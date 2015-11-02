@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
 
 @Entity
 public class Vente implements Serializable {
@@ -16,6 +17,7 @@ public class Vente implements Serializable {
     
     private Float montantInitial;
     private Float montantReserve;
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateDebut;
     private Integer duree;
     private String etat;
