@@ -36,19 +36,36 @@ public class AppliMain {
         Vente v02 = new Vente(2f, 20f, d02, 20, "en cours");
         Date d03 = new GregorianCalendar(1983, 03, 03).getTime();
         Vente v03 = new Vente(3f, 30f, d03, 30, "prochainement");
-        
+
         Produit p01 = new Produit("P01", "super", "parfait");
         Produit p02 = new Produit("P02", "hyper", "plus que parfait");
         Produit p03 = new Produit("P03", "méga", "subjonctif");
-        
+
         Categorie c01 = new Categorie("C01");
         Categorie c02 = new Categorie("C02");
         Categorie c03 = new Categorie("C03");
-        
-        
+
         //Associations
-        
-        
+        e01.setUtilisateur(u01); // chaque enchère est effectuée par un seul utilisateur
+        e02.setUtilisateur(u02);
+        e03.setUtilisateur(u03);
+
+        e01.setVente(v01);
+        e02.setVente(v02);
+        e03.setVente(v01);
+
+        v01.setUtilisateur(u01);
+        v02.setUtilisateur(u02);
+        v03.setUtilisateur(u01);
+
+        v01.setProduit(p01);
+        v02.setProduit(p02);
+        v03.setProduit(p01);
+
+        p01.setCategorie(c01);
+        p02.setCategorie(c02);
+        p03.setCategorie(c01);
+
         //Gestion des entités
         em.persist(e01);
         em.persist(e02);
@@ -57,15 +74,15 @@ public class AppliMain {
         em.persist(u01);
         em.persist(u02);
         em.persist(u03);
-        
+
         em.persist(v01);
         em.persist(v02);
         em.persist(v03);
-        
+
         em.persist(p01);
         em.persist(p02);
         em.persist(p03);
-        
+
         em.persist(c01);
         em.persist(c02);
         em.persist(c03);

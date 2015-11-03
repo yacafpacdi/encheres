@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 
 @Entity
@@ -19,8 +20,10 @@ public class Enchere implements Serializable {
     
     
     //associations
-    
-    
+    @ManyToOne
+    private Utilisateur utilisateur;
+    @ManyToOne
+    private Vente vente;
     
 
     public Enchere() {
@@ -73,6 +76,22 @@ public class Enchere implements Serializable {
 
     public void setMontant(Float montant) {
         this.montant = montant;
+    }
+
+    public Utilisateur getUtilisateur() {
+        return utilisateur;
+    }
+
+    public void setUtilisateur(Utilisateur utilisateur) {
+        this.utilisateur = utilisateur;
+    }
+
+    public Vente getVente() {
+        return vente;
+    }
+
+    public void setVente(Vente vente) {
+        this.vente = vente;
     }
     
 }

@@ -1,10 +1,13 @@
 package entites;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Utilisateur implements Serializable {
@@ -23,14 +26,21 @@ public class Utilisateur implements Serializable {
     
     //associations
     
+    @OneToMany(mappedBy = "utilisateur")
+    private Collection<Enchere> encheres;
+    @OneToMany(mappedBy = "utilisateur")
+    private Collection<Vente> ventes;
     
     
     
 
     public Utilisateur() {
+        encheres = new ArrayList<>();
+        ventes = new ArrayList<>();
     }
 
     public Utilisateur(String nom, String prenom, String email, String motDePasse) {
+        this();
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
@@ -104,6 +114,22 @@ public class Utilisateur implements Serializable {
 
     public void setMotDePasse(String motDePasse) {
         this.motDePasse = motDePasse;
+    }
+
+    public Collection<Enchere> getEncheres() {
+        return encheres;
+    }
+
+    public void setEncheres(Collection<Enchere> encheres) {
+        this.encheres = encheres;
+    }
+
+    public Collection<Vente> getVentes() {
+        return ventes;
+    }
+
+    public void setVentes(Collection<Vente> ventes) {
+        this.ventes = ventes;
     }
     
 }

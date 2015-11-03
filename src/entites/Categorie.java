@@ -1,10 +1,13 @@
 package entites;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Categorie implements Serializable {
@@ -17,17 +20,21 @@ public class Categorie implements Serializable {
     
     
     //associations
+    @OneToMany(mappedBy = "categorie")
+    private Collection<Produit> produits;
     
     
     
 
     public Categorie() {
+        produits = new ArrayList<>();
     }
     
     
     
 
     public Categorie(String nom) {
+        this();
         this.nom = nom;
     }
 
@@ -77,6 +84,14 @@ public class Categorie implements Serializable {
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public Collection<Produit> getProduits() {
+        return produits;
+    }
+
+    public void setProduits(Collection<Produit> produits) {
+        this.produits = produits;
     }
     
 }

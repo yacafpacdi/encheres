@@ -1,43 +1,72 @@
 package entites;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 
 @Entity
 public class Vente implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     private Float montantInitial;
     private Float montantReserve;
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date dateDebut;
     private Integer duree;
     private String etat;
-    
-    
-    
+
     //associations
+    @OneToMany(mappedBy = "vente")
+    private Collection<Enchere> encheres;
+    @ManyToOne
+    private Utilisateur utilisateur;
+    @ManyToOne
+    private Produit produit;
+    
 
     public Vente() {
+        encheres = new ArrayList<>();
     }
 
     public Vente(Float montantInitial, Float montantReserve, Date dateDebut, Integer duree, String etat) {
+        this();
         this.montantInitial = montantInitial;
         this.montantReserve = montantReserve;
         this.dateDebut = dateDebut;
         this.duree = duree;
         this.etat = etat;
     }
+
+    public Vente(Float montantInitial, Float montantReserve, Date dateDebut, Integer duree, String etat, Collection<Enchere> encheres) {
+        this();
+        this.montantInitial = montantInitial;
+        this.montantReserve = montantReserve;
+        this.dateDebut = dateDebut;
+        this.duree = duree;
+        this.etat = etat;
+        this.encheres = encheres;
+    }
+
     
-    
+    public Utilisateur getUtilisateur() {
+        return utilisateur;
+    }
+
+    public void setUtilisateur(Utilisateur utilisateur) {
+        this.utilisateur = utilisateur;
+    }
     
     
 
@@ -113,5 +142,21 @@ public class Vente implements Serializable {
     public void setEtat(String etat) {
         this.etat = etat;
     }
-    
+
+    public Collection<Enchere> getEncheres() {
+        return encheres;
+    }
+
+    public void setEncheres(Collection<Enchere> encheres) {
+        this.encheres = encheres;
+    }
+
+    public Produit getProduit() {
+        return produit;
+    }
+
+    public void setProduit(Produit produit) {
+        this.produit = produit;
+    }
+
 }
